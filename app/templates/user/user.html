@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<div class="container">
+        <blockquote>    
+                {% for item in quote %}  
+                    {{ item.quote}}
+                    <h5><cite style="color:#006621;">{{item.author}}</cite>                
+                {% endfor %}
+            </blockquote>
+<h3>Recent posts</h3>
+    {% for recent_post in recent_posts %}
+    <dl>
+            <dt><a href="{{url_for('user.view_post', id=recent_post.id)}}">{{recent_post.title| safe}}</a> </dt>
+            <dd>{{recent_post.post| safe| truncate(250)}}...<a href="{{url_for('user.view_post', id=recent_post.id)}}">Read more</a></dd>                    
+            <dd><small>{{recent_post.author| safe}}</small></dd>
+            <dd><small>{{ recent_post.postedAt.strftime('%Y-%m-%d') }}</small></dd>
+        </dl> 
+        
+        
+    {% endfor %}
+<h3>Older Posts</h3>
+{% for post in all_posts %}
+<dl>
+    <dt><a href="{{url_for('user.view_post', id=post.id)}}">{{post.title| safe}}</a> </dt>
+    <dd>{{post.post|safe | truncate(250)}}...<a href="{{url_for('user.view_post', id=post.id)}}">Read more</a></dd>                    
+    <dd><small>{{post.author| safe}}</small></dd>
+    <dd><small>{{ post.postedAt.strftime('%Y-%m-%d') }}</small></dd>
+    </dl>  
+    
+    
+    
+{% endfor %}
+</div>
+
+{% endblock %}
+
+
