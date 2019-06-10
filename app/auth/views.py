@@ -4,6 +4,7 @@ from flask_login import login_required, login_user, logout_user
 from ..models import User
 from .forms import RegistrationForm, LoginForm
 from .. import db
+from ..user import user
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -15,7 +16,7 @@ def login():
         if user is not None and user.verify_password(login_form.password.data):
             print("Hello")
             login_user(user, login_form.remember.data)
-            # return redirect(request.args.get('next') or url_for('User_user.dashboard'))
+            return redirect(request.args.get('next') or url_for('user.homepage'))
             
         flash('Invalid Username or Password')
 
