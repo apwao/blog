@@ -31,3 +31,40 @@ class User(UserMixin,db.Model):
     
     def __repr__(self):
         return "Writer {}".format(self.username)
+
+class BlogPost(db.Model):
+    """
+    """
+    __tablename__ ='posts'
+    id = db.Column(db.Integer,primary_key=True)
+    title = db.Column(db.String)
+    post = db.Column(db.String)
+    author = db.Column(db.String)
+    postedAt = db.Column(db.DateTime, default=datetime.utcnow)
+
+class Comment(db.Model):
+    """
+    """
+    __tablename__='comments'
+    id = db.Column(db.Integer,primary_key=True)
+    title = db.Column(db.String)
+    comment = db.Column(db.String)
+    postedAt = db.Column(db.DateTime, default=datetime.utcnow)
+    comment_id = db.Column(db.Integer)
+
+class Subscriber(db.Model):
+    """
+    """
+    __tablename__="subscribers"
+    id = db.Column(db.Integer,primary_key=True)
+    email = db.Column(db.String)
+
+
+    
+class Quote:
+    def __init__(self, quote, author):
+        self.quote = quote
+        self.author = author 
+        
+    
+           
