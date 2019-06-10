@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="container">
+<div class="row">
+<!-- displaying  Username-->
+ <div >
+   <h3> {{user.username| capitalize}} </h3>
+
+   <!--Displaying user bio-->
+   
+ </div>
+ <div>
+   
+   
+     {%for post in posts %}
+     
+     <dl>
+        
+       <a href="{{url_for('user.edit', id=post.id)}}"><i class="glyphicon glyphicon-pencil"></i></a>
+       <a href="{{url_for('user.delete_post', id=post.id)}}"><i class="glyphicon glyphicon-trash"></i></a>
+        
+        <dt>{{post.title | safe}} </dt>
+        <dd>{{post.post | safe}}</dd>                    
+        <dd><small>{{post.postedAt.strftime('%Y-%m-%d')}}</small></dd>
+    </dl>
+     
+        
+
+     {% endfor %}
+
+ </div>
+{% endblock %}
