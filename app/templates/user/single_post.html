@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <dl>
+        <dt>{{single_post.title|safe}}</dt>
+        <dd>{{single_post.post|safe}}</dd>                    
+        <dd><small>{{ single_post.postedAt.strftime('%Y-%m-%d') }}</small></dd>
+    </dl>
+    
+    {% if comments %}
+    <h5><a href="{{url_for('user.add_comment', id=single_post.id)}}">Write a comment</a></h5>
+    {% for item in comments %}
+        <dl>
+            <dt>{{item.title|safe}} </dt>
+            <dd>{{item.comment|safe}}</dd>
+                               
+            <dd><small>{{ item.postedAt.strftime('%Y-%m-%d') }}</small></dd>
+        </dl>
+    {% endfor %}
+    {% else %}
+    <h3><a href="{{url_for('user.add_comment', id=single_post.id)}}">Write a comment</a></h3>
+        {{single_post.title|safe}} has no comments yet.
+        
+    {% endif %}
+</div>
+{% endblock %}
