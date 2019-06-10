@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<h3>{{blog.title|safe}}</h3>
+<dl>
+        <dt>{{blog.title|safe}}</dt>
+        <dd>{{blog.post|safe}}</dd>                    
+        <dd><small>{{ blog.postedAt.strftime('%Y-%m-%d') }}</small></dd>
+        
+    </dl>
+    <h3>Update Blog</h3>
+                <hr>
+                {{wtf.quick_form(form)}}
+                {{simplemde.load}}
+
+{% endblock %}
